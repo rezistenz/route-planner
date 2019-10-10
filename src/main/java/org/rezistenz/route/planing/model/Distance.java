@@ -40,6 +40,10 @@ public class Distance {
         this.loadFactor = loadFactor;
     }
 
+    public double getTimeWithLoadFactor() {
+        return time * loadFactor;
+    }
+
     @Override
     public String toString() {
         return "Distance{" +

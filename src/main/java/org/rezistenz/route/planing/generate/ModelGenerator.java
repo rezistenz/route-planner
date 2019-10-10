@@ -12,7 +12,7 @@ public class ModelGenerator {
 
     private int locCount = 100;
 
-    private int locMaxSum = 100; // rub
+    private int locMaxSum = 100; // 1000 rub
     private int locMaxServiceTime = 30; // min
 
     private int distMaxLength = 30; // km
@@ -20,37 +20,37 @@ public class ModelGenerator {
     private int distMaxSpeed = 80; // km/h
     private int distMaxLoadFactor = 10;  // real speed = defult speed / load factor
 
-    public ModelGenerator setLocCount(int locCount) {
+    public ModelGenerator setLocCount(final int locCount) {
         this.locCount = locCount;
         return this;
     }
 
-    public ModelGenerator setLocMaxSum(int locMaxSum) {
+    public ModelGenerator setLocMaxSum(final int locMaxSum) {
         this.locMaxSum = locMaxSum;
         return this;
     }
 
-    public ModelGenerator setLocMaxServiceTime(int locMaxServiceTime) {
+    public ModelGenerator setLocMaxServiceTime(final int locMaxServiceTime) {
         this.locMaxServiceTime = locMaxServiceTime;
         return this;
     }
 
-    public ModelGenerator setDistMaxLength(int distMaxLength) {
+    public ModelGenerator setDistMaxLength(final int distMaxLength) {
         this.distMaxLength = distMaxLength;
         return this;
     }
 
-    public ModelGenerator setDistMinSpeed(int distMinSpeed) {
+    public ModelGenerator setDistMinSpeed(final int distMinSpeed) {
         this.distMinSpeed = distMinSpeed;
         return this;
     }
 
-    public ModelGenerator setDistMaxSpeed(int distMaxSpeed) {
+    public ModelGenerator setDistMaxSpeed(final int distMaxSpeed) {
         this.distMaxSpeed = distMaxSpeed;
         return this;
     }
 
-    public ModelGenerator setDistMaxLoadFactor(int distMaxLoadFactor) {
+    public ModelGenerator setDistMaxLoadFactor(final int distMaxLoadFactor) {
         this.distMaxLoadFactor = distMaxLoadFactor;
         return this;
     }
@@ -68,8 +68,8 @@ public class ModelGenerator {
 
         final Set<Location> locations = graph.vertexSet();
 
-        for (Location locationFrom: locations) {
-            for (Location locationTo: locations) {
+        for (final Location locationFrom: locations) {
+            for (final Location locationTo: locations) {
                 if (locationFrom.getId() == locationTo.getId()) {
                     continue;
                 }
@@ -86,18 +86,18 @@ public class ModelGenerator {
         return graph;
     }
 
-    private void generateLocations(Graph<Location, Distance> graph, Random random) {
+    private void generateLocations(final Graph<Location, Distance> graph, final Random random) {
         for (int index = 0; index < locCount; index++) {
             final Location location = new Location(
                     index,
-                    1 + random.nextInt(locMaxServiceTime),
+                    (1 + random.nextInt(locMaxServiceTime)) * 60,
                     (1 + random.nextInt(locMaxSum)) * 1000
             );
             graph.addVertex(location);
         }
     }
 
-    private Distance generateDistance(Random random) {
+    private Distance generateDistance(final Random random) {
         // S=V*T
         final double length = 1 + random.nextInt(distMaxLength); // km
         // V=S/T

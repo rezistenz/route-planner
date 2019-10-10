@@ -16,7 +16,7 @@ public class GeneratorTest {
 
 	@Test
 	public void testGenerate() throws ExportException {
-		int locCount = 100;
+		final int locCount = 100;
 		final Graph<Location, Distance> graph = new ModelGenerator()
 				.setLocCount(locCount)
 				.generate();
